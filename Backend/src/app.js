@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({
     origin: [
       "http://localhost:5173",
-      "https://prep-buddy-frontend.vercel.app/",
+      "https://prep-buddy-frontend.vercel.app",
     ],
     credentials: true,
   }));
