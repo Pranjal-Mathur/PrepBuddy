@@ -1,90 +1,198 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
-import { useNavigate } from "react-router";
-
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
 
-    const { isLoading , handleLogin } = useAuth();
-    const navigate = useNavigate();
+  const { isLoading, handleLogin } = useAuth();
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit = async (e)=>{
-      e.preventDefault();
-      await handleLogin({email, password});
-      navigate('/');
-    }
+    await handleLogin({
+      email,
+      password
+    });
 
-    if(isLoading){
-      return <div><h1>Loading...</h1></div>
-    }
+    navigate("/");
+  };
+
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#0b0b0b] flex items-center justify-center text-white">
+        <h1 className="text-2xl font-semibold animate-pulse">
+          Loading...
+        </h1>
+      </div>
+    );
+  }
 
 
   return (
-    <main className="min-h-screen bg-zinc-950 px-6 py-10 text-white">
-      <section className="mx-auto w-full max-w-xl">
-        <h1 className="mb-8 text-5xl font-extrabold leading-tight tracking-normal text-white">
-          Login
+    <main className="min-h-screen bg-[#0b0b0b] text-white flex flex-col items-center">
+
+
+      {/* Logo */}
+
+      <div className="mt-6 text-center">
+
+        <h1 className="text-4xl font-extrabold text-emerald-400 tracking-tight">
+          PrepBuddy
         </h1>
 
-        <form className="space-y-5" onSubmit={handleSubmit}>
+        <p className="text-xs tracking-widest text-cyan-300 mt-1">
+          MASTER YOUR PREPARATION
+        </p>
+
+      </div>
+
+
+
+      {/* Login Card */}
+
+      <section className="mt-8 w-full max-w-md px-6">
+
+
+        <h2 className="text-3xl font-bold mb-8">
+          Login
+        </h2>
+
+
+
+        <form
+          className="space-y-5"
+          onSubmit={handleSubmit}
+        >
+
+
+          {/* Email */}
+
           <div>
+
             <label
               htmlFor="email"
-              className="mb-3 block text-2xl font-semibold text-white"
+              className="block mb-2 text-sm font-semibold"
             >
               Email
             </label>
+
+
             <input
               onChange={(e)=>setEmail(e.target.value)}
+              value={email}
               id="email"
               name="email"
               type="email"
               placeholder="Enter email address"
-              className="w-full rounded-2xl bg-white px-6 py-4 text-xl text-zinc-900 outline-none ring-1 ring-zinc-300 placeholder:text-zinc-500 focus:ring-4 focus:ring-cyan-400/35"
+              className="
+              w-full
+              bg-white
+              text-black
+              rounded-xl
+              px-5
+              py-3.5
+              outline-none
+              placeholder:text-gray-400
+              focus:ring-2
+              focus:ring-cyan-400
+              "
             />
+
           </div>
 
+
+
+
+          {/* Password */}
+
           <div>
+
             <label
               htmlFor="password"
-              className="mb-3 block text-2xl font-semibold text-white"
+              className="block mb-2 text-sm font-semibold"
             >
               Password
             </label>
+
+
             <input
               onChange={(e)=>setPassword(e.target.value)}
+              value={password}
               id="password"
               name="password"
               type="password"
               placeholder="Enter password"
-              className="w-full rounded-2xl bg-white px-6 py-4 text-xl text-zinc-900 outline-none ring-1 ring-zinc-300 placeholder:text-zinc-500 focus:ring-4 focus:ring-cyan-400/35"
+              className="
+              w-full
+              bg-white
+              text-black
+              rounded-xl
+              px-5
+              py-3.5
+              outline-none
+              placeholder:text-gray-400
+              focus:ring-2
+              focus:ring-cyan-400
+              "
             />
+
           </div>
+
+
+
+
+          {/* Button */}
 
           <button
             type="submit"
-            className="w-full rounded-2xl bg-emerald-500 px-6 py-4 text-xl font-bold text-zinc-950 shadow-lg shadow-emerald-950/40 transition hover:bg-emerald-400 focus:outline-none focus:ring-4 focus:ring-emerald-300"
+            className="
+            w-full
+            rounded-xl
+            bg-emerald-500
+            py-3.5
+            font-bold
+            text-black
+            transition
+            hover:bg-emerald-400
+            focus:ring-4
+            focus:ring-emerald-300
+            "
           >
+
             Sign in
+
           </button>
+
+
         </form>
 
-        <p className="mt-6 text-2xl font-semibold text-white">
-          Don&apos;t have an account?{" "}
+
+
+
+        <p className="mt-7 text-sm font-semibold">
+
+          Don't have an account?{" "}
+
           <Link
             to="/register"
-            className="text-cyan-400 underline decoration-cyan-900 underline-offset-2 hover:text-cyan-300"
+            className="text-cyan-400 underline hover:text-cyan-300"
           >
             Register
           </Link>
+
         </p>
+
+
+
       </section>
+
+
     </main>
   );
 };

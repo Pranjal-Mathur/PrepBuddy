@@ -2,6 +2,9 @@ import { Navigate, createBrowserRouter } from "react-router"
 import Login from "./features/auth/pages/login"
 import Register from "./features/auth/pages/register"
 import Protected from "./features/auth/components/Protected"
+import Home from "./features/ai/pages/Home"
+import Interview from "./features/ai/pages/Interview"
+import PreviousReports from "./features/ai/pages/PreviousReports";
 
 const NotFound = () => {
     return (
@@ -29,10 +32,21 @@ export const router = createBrowserRouter([
     },
     {
         path : "/",
-        element : <Protected><h1>Home page</h1></Protected>
+        element : <Protected><Home/></Protected>
     },
     {
         path: "*",
         element: <NotFound />
-    }
+    },
+    {
+        path : "/interview/:interviewid",
+        element : <Protected><Interview/></Protected>
+    },
+    // {
+    //     path:"/reports",
+    //     element:
+    //       <Protected>
+    //         <PreviousReports/>
+    //       </Protected>
+    //   }
 ])
