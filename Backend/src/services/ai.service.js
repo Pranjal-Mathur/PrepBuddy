@@ -1,8 +1,16 @@
 const { GoogleGenAI, Type } = require("@google/genai");
 
 const ai = new GoogleGenAI({
-    apiKey: process.env.GOOGLE_GENAI_API_KEY
+    apiKey: process.env.GOOGLE_GENAI_API_KEY || process.env.GOOGLE_API_KEY
 });
+
+async function invokeGemini(){
+    const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: 'Hello, What is an interview!',
+    });
+    console.log(response.text);
+}
 
 const interviewReportSchema = {
     type: Type.OBJECT,
@@ -159,5 +167,6 @@ ${jobDescription}
 }
 
 module.exports = {
+    invokeGemini,
     generateInterviewReport
 };
